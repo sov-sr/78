@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام الحسن - إدارة الرواتب</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- صفحة تسجيل الدخول -->
+<div id="loginPage" class="login-container">
+  <div class="login-box">
+    <h1>نظام الحسن</h1>
+    <p class="subtitle">إدارة رواتب الموظفين</p>
+    <input type="text" id="username" placeholder="اسم المستخدم" autocomplete="off">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="login()">دخول</button>
+    <p id="loginError" class="error"></p>
+  </div>
+</div>
+
+<!-- التطبيق الرئيسي -->
+<div id="app" class="app-container" style="display:none;">
+  <header>
+    <h1>نظام الحسن</h1>
+    <button onclick="logout()" class="logout-btn">خروج</button>
+  </header>
+
+  <!-- نموذج إضافة موظف -->
+  <div class="card">
+    <h2>➕ إضافة / تعديل موظف</h2>
+    <div class="form-grid">
+      <input type="hidden" id="empId">
+      <input type="text" id="empName" placeholder="اسم الموظف">
+      <input type="text" id="empJob" placeholder="العمل / الوظيفة">
+      <input type="number" id="empSalary" placeholder="الراتب الشهري">
+      <input type="number" id="empAbsent" placeholder="أيام الغياب" min="0">
+      <input type="number" id="empDeduction" placeholder="المبلغ المأخوذ / الخصم" min="0" step="0.01">
+      <input type="text" id="empMonth" placeholder="الشهر (مثال: 2026-10)">
+    </div>
+    <div class="btn-row">
+      <button onclick="saveEmployee()" class="primary">💾 حفظ</button>
+      <button onclick="resetForm()" class="secondary">مسح</button>
+    </div>
+  </div>
+
+  <!-- جدول الموظفين -->
+  <div class="card">
+    <div class="table-header">
+      <h2>📋 سجل الموظفين</h2>
+      <input type="text" id="searchInput" placeholder="🔍 بحث..." oninput="renderTable()">
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>الاسم</th>
+            <th>العمل</th>
+            <th>الشهر</th>
+            <th>الراتب</th>
+            <th>أيام الغياب</th>
+            <th>الخصم</th>
+            <th>الصافي</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <div class="summary" id="summary"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
